@@ -1,0 +1,33 @@
+.panouri{
+    width: 252px;
+    height: 344px;
+    color: black;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    justify-content: space-between;
+    
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .descriere{
+        font-weight: 500;
+        position: absolute;
+        top: 50px;
+        left: 15px;
+    }
+
+    .titlu{
+        font-weight: 600;
+        font-size: 22px;
+        position: absolute;
+        top: 15px;
+        left: 40px;
+        
+        
+    }
+}

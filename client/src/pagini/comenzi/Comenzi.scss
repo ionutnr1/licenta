@@ -1,0 +1,45 @@
+.comenzi{
+    display: flex;
+    justify-content: center;
+
+    .container{
+        width: 1400px;
+        padding: 30px 0;
+
+        .titlu{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        table{
+            width: 100%;
+
+            tr{
+                height: 50px;
+
+                th{
+                    text-align: left;
+                }
+                td{
+                    .img{
+                        width: 50px;
+                        height: 25px;
+                        object-fit: cover;
+                    }
+                    
+                    .butoane{
+                        cursor: pointer;
+                        justify-content: space-between;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+
+                &:nth-child(even){
+                    background-color: rgb(255, 228, 179);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,68 @@
+.main{
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(255, 228, 179);
+    color: white;
+    .container{
+        width: 1400px;
+        display: flex;
+        align-items: center;
+
+        .stanga{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            h1{
+                font-style: 50px;
+            }
+
+            .cautare{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: white;
+                border-radius: 20px;
+
+                .casuta{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    img{
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 20px;
+                    }
+
+                    input{
+                        border: none;
+                        outline: none;
+                    }
+                }
+                button{
+                    width: 120px;
+                    height: 50px;
+                    border: none;
+                    background-color: orange;
+                    color:grey;
+                    border-radius: 20px;
+                    cursor: pointer;
+
+                    &:hover{
+                        background-color: white;
+                        transition: background-color 0.9s ease;
+                        color: black;
+                    }
+                }
+            }
+        }
+
+        .dreapta{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+    }
+}

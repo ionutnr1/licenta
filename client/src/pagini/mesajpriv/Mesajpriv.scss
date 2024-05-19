@@ -1,0 +1,84 @@
+.mesajpriv{
+    display: flex;
+    justify-content: center;
+
+    .container{
+        width: 1200px;
+        margin: 50px;
+        .cale{
+            font-size: 14px;
+            font-weight: 400;
+            color: gray;
+        }
+        .mesaje{
+            margin: 30px 0;
+            padding: 40px;
+            gap: 15px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            overflow: scroll;
+            .item{
+                font-size: 20px;
+                gap: 15px;
+                min-width: 600px;
+                display: flex;
+    
+                &.eu{
+                    align-self: flex-end;
+                    flex-direction: row-reverse;
+                    align-self: flex-end;
+                }
+                p{
+                    background-color: DodgerBlue;
+                    color: white;
+                    max-width: 500px;
+                    padding: 10px;
+                    border-radius: 20px 0 20px 0;
+                }
+            }
+
+            img{
+                object-fit: cover;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+
+            p{
+                max-width: 500px;
+                padding: 10px;
+                color: gray;
+                border-radius: 20px 0 20px 0;
+            }
+
+            hr{
+                height: 0;
+                border: 1px solid gray;
+            }
+        }
+        .scrie{
+            margin: 0 0 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            textarea{
+                padding: 10px;
+                height: 100px;
+                width: 80%;
+                border: 1px solid gray;
+                border-radius: 5px;
+            }
+
+            button{
+                cursor: pointer;
+                background-color: rgb(249, 168, 17);
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+    }
+}

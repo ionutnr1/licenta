@@ -1,0 +1,61 @@
+.footer{
+    display: flex;
+    justify-content: center;
+    color: lightgray;
+
+    img{
+        width: 24px;
+        height: 24px;
+    }
+    .container{
+        width: 1400px;
+        .half1{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 0 20px;
+            .item{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                h2{
+                    font-size: 16px;
+                    color: #555;
+                }
+
+                span{
+                    font-weight: 400;
+                }
+            }
+        }
+
+        hr{
+            border: 1px solid lightgray;
+        }
+        .half2{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            .stanga{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .dreapta{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .retele{
+                    display: flex;
+                    align-items: center;
+                    grid-area: 20px;
+                    gap: 10px;
+                }
+            }
+        }
+    }
+}

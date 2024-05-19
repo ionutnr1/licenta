@@ -1,0 +1,86 @@
+.CardAnunt{
+    width: 324px;
+    height: 370px;
+    border: 1px solid lightgray;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    
+    img{
+        width: 100%;
+        height: 50%;
+        object-fit: cover;
+    }
+
+    .info{
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .utilizator{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            img{
+                width: 24px;
+                height: 24px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+
+        p{
+            color: black;
+        }
+
+        .rating{
+            gap: 10px;
+            display: flex;
+            align-items: center;
+
+            img{
+                width: 14px;
+                height: 14px;
+            }
+
+            span{
+                font-size: 14px;
+                font-weight: 500;
+                color: rgb(249, 168, 17);
+            }
+        }
+    }
+
+    hr{
+        height: 0px;
+        border: 1px solid lightgray;
+    }
+    .detalii{
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        img{
+            object-fit: cover;
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+
+        .pret{
+            span{
+                color: black;
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            h2{
+                color: grey;
+                font-size: 18px;
+                font-weight: 300;
+            }
+        }
+    }
+}

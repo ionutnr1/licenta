@@ -1,0 +1,20 @@
+.categorii{
+    display: flex;
+    justify-content: center;
+    padding: 100px 0;
+
+    .container{
+        width: 1400px;
+
+        .carousel-prev, .carousel-next{
+            background-color: lightgray;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border-radius: 10px;
+        }
+    }
+}
