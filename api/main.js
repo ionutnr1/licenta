@@ -9,11 +9,13 @@ import rutaRating from "./routes/rating.route.js";
 import rutaUser from "./routes/user.route.js"
 import cookieParser from "cookie-parser";
 import cors from "cors"
+import dotenv from "dotenv"
 
 
 
 const app = express();
 mongoose.set("strictQuery", true)
+dotenv.config();
 
 const conectare = async () => {
   try {
@@ -46,7 +48,7 @@ app.use((err,req,res,next)=>{
   return res.status(statusEroare).send(mesajEroare);
 });
 
-const port = 443;
+const port = 3000;
 app.listen(port, () => {
   conectare();
   console.log("Bakcend-ul ruleaza pe portul", port, "fara probleme");

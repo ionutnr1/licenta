@@ -1,12 +1,22 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import "./Anunturi.scss"
 import {anunturi} from "../../data"
 import CardAnunt from "../../componente/CardAnunt/CardAnunt"
+import requestNou from "../../utils/requestNou";
+import { useQuery } from "@tanstack/react-query";
 
 const Anunturi = () => {
 
     const [open, setOpen] = useState(false);
     const [sort, setSort] = useState("vanzari");
+    const minRef = useRef();
+    const maxRef = useRef();
+
+    const { isPending, error, data } = useQuery({
+        queryKey: ['repoData'],
+        queryFn: () =>
+            requestNou("/anunturi")
+        })
 
     const reSort = (type) => {
         setSort(type)

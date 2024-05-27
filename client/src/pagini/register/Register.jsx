@@ -67,7 +67,7 @@ function Register() {
                         onChange={handleChange}
                     />
                     <label htmlFor="">Parola</label>
-                    <input name="parola" type="parola" onChange={handleChange} />
+                    <input name="parola" type="password" onChange={handleChange} />
                     <label htmlFor="">Poza de profil</label>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                     <label htmlFor="">Tara</label>

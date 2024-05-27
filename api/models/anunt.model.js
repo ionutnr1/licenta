@@ -13,11 +13,11 @@ const anuntSchema = new Schema(
     },
     subTitlu: {
       type: String,
-      required: true,
+      required: false,
     },
     miniDescriere: {
       type: String,
-      required: true,
+      required: false,
     },
     timpEstimat: {
       type: String,
@@ -29,7 +29,7 @@ const anuntSchema = new Schema(
     },
     imagini: {
       type: [String],
-      required: true,
+      required: false,
     },
     coperta: {
       type: String,
@@ -38,11 +38,11 @@ const anuntSchema = new Schema(
     rating: {
       type: Number,
       default: 0,
-      required: true,
+      required: false,
     },
     totalRating: {
       type: Number,
-      required: true,
+      required: false,
     },
     categorie: {
       type: String,

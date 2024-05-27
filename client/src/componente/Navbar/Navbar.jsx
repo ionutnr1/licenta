@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import requestNou from "../../utils/requestNou";
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
@@ -18,10 +19,19 @@ const Navbar = () => {
         };
     }, []);
 
-    const currentUser = {
-        id: 1,
-        utilizator: "Ionut Coste",
-        vanzator: true
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            await requestNou.post("/autentificare/logout");
+            localStorage.setItem("currentUser", null);
+            navigate("/");
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -34,17 +44,17 @@ const Navbar = () => {
                     <span className="up">UP</span>
                 </div>
                 <div className="linkuri">
-                    <span>Descopera</span>
-                    {!currentUser?.vanzator && <span>Vinde servicii</span>}
-                    <span>Sign In</span>
-                    {!currentUser && <button>Alatura-te!</button>}
+                    <Link to={"/"} className="link">Descopera</Link>
+                    {!currentUser?.isVanzator && <span>Vinde servicii</span>}
+                    <Link to={"/login"} className="link">Log In</Link>
+                    <Link to="/register" className="link"><button>Alatura-te!</button></Link>
                     {currentUser && (
                         <div className="utilizator" onClick={() => setOpen(!open)}>
                             <img src="https://cdn-icons-png.flaticon.com/128/2102/2102647.png" alt="" />
                             <span>{currentUser?.utilizator}</span>
                             {open && (
                                 <div className="optiuni">
-                                    {currentUser?.vanzator && (
+                                    {currentUser?.isVanzator && (
                                         <>
                                             <Link to={"/anuntadm"} className="link">Anunturi</Link>
                                             <Link to={"/addanunt"} className="link">Adauga Anunt</Link>
@@ -52,7 +62,7 @@ const Navbar = () => {
                                     )}
                                     <Link to={"/comenzi"} className="link">Comenzi</Link>
                                     <Link to={"/mesaje"} className="link">Mesaje</Link>
-                                    <Link to={"/"} className="link">Delogare</Link>
+                                    <Link onClick={handleLogout} className="link">Delogare</Link>
                                 </div>
                             )}
                         </div>

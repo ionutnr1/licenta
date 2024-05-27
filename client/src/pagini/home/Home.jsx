@@ -11,23 +11,10 @@ const Home = () => {
 
         <div className="text-bar">
                 <div className="coloana">
-                    <h1>Dorinta noastra.</h1>
-                    <div className="titlu">
-                        -Conexiune-
-                    </div>
-                        <p>Facilitam conectarea între firme, persoane fizice și mici antreprenori, oferindu-le posibilitatea de a publica anunțuri pentru diverse servicii eficient si accesibil.</p>
-                    <div className="titlu">
-                        -Promovare-
-                    </div>
-                        <p>Sprijinim si promovam micii întreprinzători, oferindu-le o platformă accesibilă și eficientă pentru a-și promova serviciile și pentru a-și extinde prezența în piață.</p>
-                    <div className="titlu">
-                        -Eficienta-
-                    </div>
-                        <p>Alege persoana potrivita nevoilor tale fara sa fie nevoie de intalniri sau timp pierdut.</p>
-                    <div className="titlu">
-                        -Carefree-
-                    </div>
-                    <p>Stabileste un pret si plateste online fara alte griji si fara timp de asteptare.</p>
+                    <h1>Descriere.</h1>
+                        <h2>Aplicația noastră este o platformă dedicată micilor firme și persoanelor fizice autorizate (PFA-uri) care doresc să își promoveze serviciile și să atragă clienți noi. Prin intermediul aplicației, utilizatorii pot posta anunțuri detaliate despre serviciile oferite, inclusiv informații despre prețuri, disponibilitate și recenzii de la clienți anteriori. De asemenea, clienții pot căuta și compara oferte de servicii într-un mod eficient și intuitiv, având la dispoziție filtre și categorii specifice care să îi ajute să găsească exact ceea ce caută.</h2>
+                    <h1>Descriere.</h1>
+                        <h2>Motivația din spatele creării acestei aplicații este de a sprijini micile afaceri și PFA-urile, oferindu-le un instrument accesibil și eficient pentru a-și promova serviciile într-un mediu digital din ce în ce mai competitiv. În contextul în care mediul online devine tot mai important pentru atragerea clienților, ne-am dorit să creăm o platformă care să faciliteze interacțiunea între furnizorii de servicii și potențialii clienți.</h2>
                 </div>
     
 

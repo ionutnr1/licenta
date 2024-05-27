@@ -12,3 +12,9 @@ export const deleteUtilizator = async (req,res, next) =>{
         await User.findByIdAndDelete(req.params.id);
         return res.status(200).send("Utilizator sters!")
 };
+
+export const getUtilizator = async (req, res, next) => {
+  const utilizator = await User.findById(req.params.id);
+
+  res.status(200).send(utilizator);
+};

@@ -12,7 +12,11 @@ import Register from "./pagini/register/Register";
 import Anuntadm from "./pagini/anuntadm/Anuntadm";
 import Mesajpriv from "./pagini/mesajpriv/Mesajpriv";
 import "./app.scss"
-
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,12 +25,16 @@ import {
 
 function App() {
 
+  const queryClient = new QueryClient()
+
   const Layout = () =>{
     return(
       <div className="principal">
+      <QueryClientProvider client={queryClient}>
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
+      /</QueryClientProvider>
       </div>
       );
   }

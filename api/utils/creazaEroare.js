@@ -1,4 +1,4 @@
-const creazaEroare = (status, mesaj) => {
+const creeazaEroare = (status, mesaj) => {
     const err = new Error();
     err.status =status;
     err.message=mesaj;
@@ -6,4 +6,4 @@ const creazaEroare = (status, mesaj) => {
     return err;
 };
 
-export default creazaEroare;
+export default creeazaEroare;
