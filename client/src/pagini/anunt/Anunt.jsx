@@ -1,42 +1,73 @@
 import React from 'react'
 import "./Anunt.scss"
 import { Slider } from 'infinite-react-carousel'
-import "./Anunt.scss"
+import { useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import requestNou from '../../utils/requestNou'
+import { Link } from 'react-router-dom'
 
 const Anunt = () => {
+
+const {id} = useParams()
+
+    const { isLoading, error, data, refetch } = useQuery({
+        queryKey: ['anunt'],
+        queryFn: () =>
+            requestNou.get(`/anunturi/single/${id}`).then((res) => {
+                return res.data;
+            }),
+    });
+
+    const userId = data?.userId;
+
+    const {
+        isLoading: isLoadingUser,
+        error: errorUser,
+        data: dataUser,
+    } = useQuery({
+        queryKey: ["user"],
+        queryFn: () =>
+            requestNou.get(`/users/${userId}`).then((res) => {
+                return res.data;
+            }),
+        enabled: !!userId,
+    });
+
     return (
         <div className='anunt'>
+            {isLoading?("loading") : error ? ("Ceva nu a functionat"):(
             <div className="container">
                 <div className="stanga">
                     <span className='Cale'>ServUP {'>'} IT</span>
-                    <h1>Web developer cu experienta in domeniu de peste 5 ani.</h1>
-                    <div className="utilizator">
-                        <img src="/imagini/imgprofil.png" alt="profil" className='profil' />
-                        <span>Rares Pop</span>
+                    <h1>{data.title}</h1>
+                    {isLoadingUser ? ("loading") : errorUser ? ("Ceva nu a functionat") : (
+                        <div className="utilizator">
+                        <img src={dataUser.imagini || "/imagini/avatar.jpg"} alt="profil" className='profil' />
+                        <span>{dataUser.utilizator}</span>
                         <div className="rating">
                             <img src="/imagini/rating.png" alt="" />
                             <img src="/imagini/rating.png" alt="" />
                             <img src="/imagini/rating.png" alt="" />
                             <img src="/imagini/rating.png" alt="" />
-                            <span>4</span>
+                            <span>{data.rating}</span>
                         </div>
                     </div>
+                    )}
                     <Slider className="slider">
-                        <img src="https://www.growthzone.com/wp-content/uploads/2020/07/GrowthZone-Website-Examples.png" alt="" />
-                        <img src="https://www.yourmembership.com/wp-content/uploads/2023/06/ym-web-design-services-responsive-mockup-tiny.png" alt="" />
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzhJB1Y6VP7niy8o6M1HM3ElVvqpBdm5RvS1GZ6eGhoiWjrQUMn-UezYv0AO-XNNkEH6s&usqp=CAU" alt="" />
-                        <img src="https://www.webfx.com/wp-content/uploads/2023/10/example-of-beautiful-websites-2-slack.png" alt="" />
+                        {data.imagini.map((img)=>(
+                            <img key={img} src={img} alt=''/>
+                        ))}
                     </Slider>
                     <h2>Cum te pot ajuta...</h2>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus accusamus molestias quos neque ullam voluptas nihil. Maiores fuga sit quaerat, non, illum id adipisci voluptas vel neque necessitatibus ad commodi. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti qui iusto officiis, nihil repudiandae, soluta laboriosam autem nostrum impedit maiores in. Hic ullam veniam consequatur ab aliquid illum eveniet voluptas! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, repellat. Consectetur repudiandae iste aliquam doloremque blanditiis tempora? Ab laudantium aliquid vitae distinctio quisquam incidunt praesentium porro, ea excepturi in temporibus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit qui enim, obcaecati molestias adipisci facilis aspernatur nam. Harum laudantium voluptate nam accusamus reiciendis porro. Quaerat vitae a fugit molestiae quo? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium beatae omnis tempora cumque quisquam facilis quae voluptate, sapiente impedit quis veritatis assumenda fugit dolorem ipsam illo maxime sit nulla cupiditate.
+                        {data.descriere}
                     </p>
                     <div className="vanzator">
                         <h2>Despre</h2>
                         <div className="utilizator">
-                            <img src="/imagini/imgprofil.png" alt="" />
+                            <img src={dataUser.imagini || "/imagini/avatar.png"} alt="" />
                             <div className="detalii">
-                                <span>Rares Pop</span>
+                                <span>{dataUser.utilizator}</span>
                                 <div className="rating">
                                     <img src="/imagini/rating.png" alt="" />
                                     <img src="/imagini/rating.png" alt="" />
@@ -51,7 +82,7 @@ const Anunt = () => {
                         <div className="descriere">
                             <div className="element">
                                 <span className="titlu">Origine</span>
-                                <span className="desc">Romana</span>
+                                <span className="desc">{dataUser.adresa}</span>
                             </div>
                                 <div className="element">
                                     <span className="titlu">Membru din:</span>
@@ -71,21 +102,21 @@ const Anunt = () => {
                                 </div>
                         </div>
                         <hr />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam nihil, consectetur esse provident eaque nisi facere ut deleniti, enim magnam aperiam natus distinctio assumenda voluptas nostrum officia veniam. Libero, quo?</p>
+                        <p>{dataUser.descriere}</p>
                     </div>
                 </div>
             </div>
             <div className="dreapta">
                 <div className="pret">
-                    <h3>Creare site web</h3>
-                    <h2>1200 LEI</h2>
+                    <h3>{data.subTitlu}</h3>
+                    <h2>{data.pret}</h2>
                 </div>
-                <p>Realizarea site-ului folosind React, MongoDB si NodeJS</p>
+                <p>{data.miniDescriere}</p>
                 <hr />
                 <div className="info">
                     <div className="item">
                         <img src="/imagini/timp.png" alt="" />
-                            <span>1 saptamana</span>
+                            <span>{data.timpEstimat} Durata</span>
                     </div>
                 
                     <div className="item">
@@ -94,10 +125,12 @@ const Anunt = () => {
                     </div>
                 </div>
                 <div className="continut">
-                    <div className="item">
-                            <img src="/imagini/mark.png" alt="" />
-                        <span>Creare baza de date</span>
+                    {data.beneficii.map((beneficiu) =>(
+                    <div className="item" key={beneficiu}>
+                        <img src="/imagini/mark.png" alt="" />
+                        <span>{beneficiu}</span>
                     </div>
+                ))}
 
                     <div className="item">
                             <img src="/imagini/mark.png" alt="" />
@@ -109,10 +142,12 @@ const Anunt = () => {
                         <span>Dezvoltare BackEnd</span>
                     </div>
                 </div>
-
+                <Link to={`/plata/${id}`}>
                 <button>Cumpara</button>
+                </Link>
+                </div>
             </div>
-            </div>
+        )}
         </div>
     )
 }

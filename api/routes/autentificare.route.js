@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/inregistrare", inregistrare);
 router.post("/conectare", conectare);
-router.get("/deconectare", deconectare);
+router.post("/deconectare", deconectare);
 
 export default router;

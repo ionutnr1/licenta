@@ -1,18 +1,30 @@
 import React from 'react'
 import "./CardAnunt.scss"
 import { Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import requestNou from '../../utils/requestNou'
+
 
 const CardAnunt = ({item}) => {
+
+    const { isPending, error, data } = useQuery({
+        queryKey: [`${item.userID}`],
+        queryFn: () =>
+            requestNou.get(`/users/4{item.userId}`).then((res) => {
+                return res.data;
+            }),
+    });
+
     return (
-        <Link to='/anunt/1' className='link'>
+        <Link to={`/anunt/${item._id}`} className='link'>
 
         <div className='CardAnunt'>
-            <img src={item.img} alt="" />
+            <img src={item.coperta} alt="" />
             <div className="info">
-                <div className="utilizator">
-                    <img src={item.imgprofil} alt="" />
-                    <span>{item.utilizator}</span>
-                </div>
+                {isPending ?  "loading" : error ? "Ceva nu a functionat" : <div className="utilizator">
+                    <img src={data.img || "/imagini/avatar.jpg"} alt="" />
+                    <span>{data.utilizator}</span>
+                </div>}
                 <p>{item.descriere}</p>
                 <div className="rating">
                     <img src="./imagini/rating.png" alt="" />

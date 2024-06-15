@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import requestNou from "../../utils/requestNou";
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
     const [open, setOpen] = useState(true);
+    const { pathname } = useLocation();
 
     const isActive = () => {
         window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -26,7 +27,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            await requestNou.post("/autentificare/logout");
+            await requestNou.post("/autentificare/deconectare");
             localStorage.setItem("currentUser", null);
             navigate("/");
         } catch (err) {
@@ -35,7 +36,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className={active ? "navbar active" : "navbar"}>
+        <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
             <div className="container">
                 <div className="logo">
                     <Link to={"/"} className="link">
@@ -50,7 +51,7 @@ const Navbar = () => {
                     <Link to="/register" className="link"><button>Alatura-te!</button></Link>
                     {currentUser && (
                         <div className="utilizator" onClick={() => setOpen(!open)}>
-                            <img src="https://cdn-icons-png.flaticon.com/128/2102/2102647.png" alt="" />
+                            <img src={currentUser?.img || "/imagini/avatar.jpg"} alt="" />
                             <span>{currentUser?.utilizator}</span>
                             {open && (
                                 <div className="optiuni">
@@ -70,15 +71,21 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <>
+                    {(active || pathname !== "/") && (
+
+                        <>
                 <hr />
                 <div className="meniu">
-                    <Link to={"/"} className="link">Grupa1</Link>
-                    <Link to={"/"} className="link">Grupa2</Link>
-                    <Link to={"/"} className="link">Grupa3</Link>
-                    <Link to={"/"} className="link">Grupa4</Link>
+                    <Link to={"/"} className="link">Design Grafic</Link>
+                    <Link to={"/"} className="link">Creare Website</Link>
+                    <Link to={"/"} className="link">Editare Foto/Video</Link>
+                    <Link to={"/"} className="link">Fotografie</Link>
+                    <Link to={"/"} className="link">Consultanta</Link>
+                    <Link to={"/"} className="link">Marketing</Link>
+                    <Link to={"/"} className="link">Copywriting</Link>
                 </div>
             </>
+                    )}
         </div>
     );
 };

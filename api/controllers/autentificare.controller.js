@@ -50,5 +50,5 @@ export const deconectare = async (req, res) => {
     res.clearCookie("accesToken", {
         sameSite:"none",
         secure: "true",
-    }).status(200),send("Ati fost delogat.")
+    }).status(200).send("Ati fost delogat.")
 };

@@ -7,7 +7,7 @@ import requestNou from "../../utils/requestNou";
 
 function Register() {
     const [file, setFile] = useState(null);
-    const [user, setUser] = useState({
+    const [utilizator, setUtilizator] = useState({
         utilizator: "",
         email: "",
         parola: "",
@@ -19,14 +19,14 @@ function Register() {
 
     
     const handleChange = (e) => {
-        setUser((prev) => {
+        setUtilizator((prev) => {
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
 
     
     const handleSeller = (e) => {
-        setUser((prev) => {
+        setUtilizator((prev) => {
             return { ...prev, isVanzator: e.target.checked };
         });
     };
@@ -39,7 +39,7 @@ function Register() {
         const url = await upload(file);
         try {
             await requestNou.post("/autentificare/inregistrare", {
-                ...user,
+                ...utilizator,
                 img: url,
             });
             navigate("/")
@@ -68,6 +68,7 @@ function Register() {
                     />
                     <label htmlFor="">Parola</label>
                     <input name="parola" type="password" onChange={handleChange} />
+
                     <label htmlFor="">Poza de profil</label>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                     <label htmlFor="">Tara</label>

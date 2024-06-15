@@ -1,27 +1,55 @@
 import React, { useState, useRef, useEffect } from "react"
 import "./Anunturi.scss"
-import {anunturi} from "../../data"
+//import {anunturi} from "../../data"
 import CardAnunt from "../../componente/CardAnunt/CardAnunt"
 import requestNou from "../../utils/requestNou";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 
-const Anunturi = () => {
 
+function Anunturi() {
+    
     const [open, setOpen] = useState(false);
     const [sort, setSort] = useState("vanzari");
     const minRef = useRef();
     const maxRef = useRef();
+    const {search} =useLocation();
 
-    const { isPending, error, data } = useQuery({
-        queryKey: ['repoData'],
-        queryFn: () =>
-            requestNou("/anunturi")
-        })
+    const { isLoading, error, data, refetch } = useQuery({
+        queryKey: ['anunturi'],
+        queryFn: () => {
+            // Construiește URL-ul cu parametri
+            const params = new URLSearchParams(search);
+            if (minRef.current.value) {
+                params.append('min', minRef.current.value);
+            }
+            if (maxRef.current.value) {
+                params.append('max', maxRef.current.value);
+            }
+            params.append('sort', sort);
+
+            // Construiește URL-ul complet
+            const url = `/anunturi?${params.toString()}`;
+            return requestNou.get(url).then((res) => {
+                return res.data;
+            });
+        },
+    });
+
+
+        console.log(data)
 
     const reSort = (type) => {
         setSort(type)
         setOpen(false)
-    }
+    };
+    useEffect(() => {
+        refetch();
+    }, [sort]);
+
+    const apply = () => {
+        refetch();
+    };
     return (
         <div className='anunturi'>
             <div className="container">
@@ -33,9 +61,9 @@ const Anunturi = () => {
                 <div className="meniu">
                     <div className="stanga">
                         <span>Pret:</span>
-                        <input type="text" placeholder='De la' />
-                        <input type="text" placeholder='Pana la' />
-                        <button>Cauta</button>
+                        <input ref={minRef} type="number" placeholder='De la' />
+                        <input ref={maxRef} type="number" placeholder='Pana la' />
+                        <button onClick={apply}>Cauta</button>
                     </div>
                     <div className="dreapta">
                         <span className='sorteaza'>Sorteaza dupa</span>
@@ -58,13 +86,13 @@ const Anunturi = () => {
                 </div>
                 <hr />
                 <div className="panouri">
-                    {anunturi.map(anunt=>(
-                        <CardAnunt key={anunt.id} item={anunt}/>
+                    {isLoading ? "loading" : error ? "Ceva nu a functionat" : data.map(anunt=>(
+                        <CardAnunt key={anunt._id} item={anunt}/>
                     ))}
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Anunturi;

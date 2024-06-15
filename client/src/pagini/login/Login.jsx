@@ -15,15 +15,19 @@ function Login() {
         try{
 
          const res = await requestNou.post("autentificare/conectare", {utilizator, parola});
-         localStorage.setItem("utilizatorCurent", JSON.stringify(res.data));
+         localStorage.setItem("currentUser", JSON.stringify(res.data));
          navigate("/")
         }catch(err){
-            if (err.message && err.message.data) {
+
+            setError(err.response.data);
+            
+        /*    if (err.message && err.message.data) {
                 setError(err.message.data);
         } else{
                 console.error(err);
                 setError(err.toString());
-        }
+            }
+                */
     }
     };
 

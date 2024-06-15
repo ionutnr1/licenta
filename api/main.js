@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({origin:"http://localhost:5173", credentials:true }));
 
-app.use("/api/anunt", rutaAnunt);
+app.use("/api/anunturi", rutaAnunt);
 app.use("/api/autentificare", rutaAutentificare);
 app.use("/api/chat", rutaChat);
 app.use("/api/comenzi", rutaComenzi);
